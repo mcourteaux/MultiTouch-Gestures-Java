@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1097172C1B42AAE2005A0E28 /* EventDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 1097172B1B42AAE2005A0E28 /* EventDispatch.h */; };
+		1097172E1B42ABDE005A0E28 /* libOSXGestures4JavaJNI.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		109717301B42AE7F005A0E28 /* EventDispatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1097172F1B42AE7F005A0E28 /* EventDispatch.mm */; };
+		109717321B42AFCD005A0E28 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717311B42AFCD005A0E28 /* Cocoa.framework */; };
+		109717351B42AFE6005A0E28 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717331B42AFE6005A0E28 /* CoreFoundation.framework */; };
+		109717361B42AFE6005A0E28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717341B42AFE6005A0E28 /* Foundation.framework */; };
+		109717381B42B00F005A0E28 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717371B42B00F005A0E28 /* AppKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1097172D1B42ABD4005A0E28 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(PROJECT_DIR)/..";
+			dstSubfolderSpec = 0;
+			files = (
+				1097172E1B42ABDE005A0E28 /* libOSXGestures4JavaJNI.dylib in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libOSXGestures4JavaJNI.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		1097172B1B42AAE2005A0E28 /* EventDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatch.h; sourceTree = "<group>"; };
+		1097172F1B42AE7F005A0E28 /* EventDispatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EventDispatch.mm; sourceTree = "<group>"; };
+		109717311B42AFCD005A0E28 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		109717331B42AFE6005A0E28 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		109717341B42AFE6005A0E28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		109717371B42B00F005A0E28 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1097170F1B42AA96005A0E28 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				109717381B42B00F005A0E28 /* AppKit.framework in Frameworks */,
+				109717351B42AFE6005A0E28 /* CoreFoundation.framework in Frameworks */,
+				109717361B42AFE6005A0E28 /* Foundation.framework in Frameworks */,
+				109717321B42AFCD005A0E28 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		109717091B42AA96005A0E28 = {
+			isa = PBXGroup;
+			children = (
+				109717371B42B00F005A0E28 /* AppKit.framework */,
+				109717331B42AFE6005A0E28 /* CoreFoundation.framework */,
+				109717341B42AFE6005A0E28 /* Foundation.framework */,
+				109717311B42AFCD005A0E28 /* Cocoa.framework */,
+				109717141B42AA96005A0E28 /* OSXGestures4JavaJNI */,
+				109717131B42AA96005A0E28 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		109717131B42AA96005A0E28 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		109717141B42AA96005A0E28 /* OSXGestures4JavaJNI */ = {
+			isa = PBXGroup;
+			children = (
+				1097172B1B42AAE2005A0E28 /* EventDispatch.h */,
+				1097172F1B42AE7F005A0E28 /* EventDispatch.mm */,
+			);
+			path = OSXGestures4JavaJNI;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		109717101B42AA96005A0E28 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1097172C1B42AAE2005A0E28 /* EventDispatch.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		109717111B42AA96005A0E28 /* OSXGestures4JavaJNI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 109717251B42AA96005A0E28 /* Build configuration list for PBXNativeTarget "OSXGestures4JavaJNI" */;
+			buildPhases = (
+				1097170E1B42AA96005A0E28 /* Sources */,
+				1097170F1B42AA96005A0E28 /* Frameworks */,
+				109717101B42AA96005A0E28 /* Headers */,
+				1097172D1B42ABD4005A0E28 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OSXGestures4JavaJNI;
+			productName = OSXGestures4JavaJNI;
+			productReference = 109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1097170A1B42AA96005A0E28 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Martijn Courteaux";
+				TargetAttributes = {
+					109717111B42AA96005A0E28 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 1097170D1B42AA96005A0E28 /* Build configuration list for PBXProject "OSXGestures4JavaJNI" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 109717091B42AA96005A0E28;
+			productRefGroup = 109717131B42AA96005A0E28 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				109717111B42AA96005A0E28 /* OSXGestures4JavaJNI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1097170E1B42AA96005A0E28 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				109717301B42AE7F005A0E28 /* EventDispatch.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		109717231B42AA96005A0E28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		109717241B42AA96005A0E28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		109717261B42AA96005A0E28 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = /System/Library/Frameworks/JavaVM.framework/Versions/Current/Headers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		109717271B42AA96005A0E28 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = /System/Library/Frameworks/JavaVM.framework/Versions/Current/Headers;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1097170D1B42AA96005A0E28 /* Build configuration list for PBXProject "OSXGestures4JavaJNI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				109717231B42AA96005A0E28 /* Debug */,
+				109717241B42AA96005A0E28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		109717251B42AA96005A0E28 /* Build configuration list for PBXNativeTarget "OSXGestures4JavaJNI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				109717261B42AA96005A0E28 /* Debug */,
+				109717271B42AA96005A0E28 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1097170A1B42AA96005A0E28 /* Project object */;
+}

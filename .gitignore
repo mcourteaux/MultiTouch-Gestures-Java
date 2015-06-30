@@ -1,0 +1,6 @@
+*.log
+target/
+*.dylib
+OSXGestures4JavaJNI/OSXGestures4JavaJNI.xcodeproj/project.xcworkspace
+OSXGestures4JavaJNI/OSXGestures4JavaJNI.xcodeproj/xcuserdata
+
