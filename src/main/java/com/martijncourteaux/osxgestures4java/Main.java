@@ -55,7 +55,8 @@ public class Main
         frame.pack();
         frame.setVisible(true);
         frame.repaint();
-
+        
+        System.out.println("Add gesture listener");
         OSXGestureUtilities.addGestureListener(comp, new GestureAdapter()
         {
 
@@ -63,7 +64,7 @@ public class Main
             public void magnify(MagnifyGestureEvent e)
             {
                 System.out.println("In listenener: magnify");
-                l *= e.getMagnification();
+                l *= 1.0 + e.getMagnification();
                 comp.repaint();
             }
 
@@ -75,5 +76,6 @@ public class Main
                 comp.repaint();
             }
         });
+        System.out.println("Added: " + OSXGestureUtilities.getListenerCount());
     }
 }

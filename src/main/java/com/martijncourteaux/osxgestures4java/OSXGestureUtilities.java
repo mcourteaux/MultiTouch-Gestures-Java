@@ -5,7 +5,6 @@
  */
 package com.martijncourteaux.osxgestures4java;
 
-import static com.martijncourteaux.osxgestures4java.EventDispatch.stop;
 import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
 import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
 import java.awt.Point;
@@ -23,7 +22,6 @@ public class OSXGestureUtilities
     
     static
     {
-        EventDispatch.init();
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable()
         {
 
@@ -38,12 +36,17 @@ public class OSXGestureUtilities
     
     private final static HashMap<JComponent, List<GestureListener>> listeners = new HashMap<JComponent, List<GestureListener>>();
     private static int listenerCount = 0;
+
+    public static int getListenerCount()
+    {
+        return listenerCount;
+    }
     
     public static void addGestureListener(JComponent component, GestureListener listener)
     {
         if (listenerCount == 0)
         {
-            EventDispatch.start();
+            EventDispatch.startInSeperateThread();
         }
         List<GestureListener> list = listeners.get(component);
         if (list == null)

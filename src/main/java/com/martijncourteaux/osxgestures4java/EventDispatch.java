@@ -12,8 +12,10 @@ import java.awt.Toolkit;
  *
  * @author martijn
  */
-public class EventDispatch
+class EventDispatch
 {    
+    private static Thread gestureEventThread;
+    
     static
     {
         System.loadLibrary("OSXGestures4JavaJNI");
@@ -21,22 +23,44 @@ public class EventDispatch
     
     public static native void init();
     
-    public static native void start();
+    private static native void start();
     
     public static native void stop();
     
+    public static void startInSeperateThread()
+    {
+        if (gestureEventThread != null)
+        {
+            if (gestureEventThread.isAlive())
+            {
+                return;
+            }
+        }
+        
+        gestureEventThread = new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                init();
+                start();
+            }
+        }, "Gesture Event Thread");
+        gestureEventThread.start();
+    }
+    
     public static void dispatchMagnifyGesture(double mouseX, double mouseY, double magnification)
     {
-        System.out.println("Magnify: " + magnification);
+//        System.out.println("Magnify: " + magnification);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         OSXGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification);
     }
     
     public static void dispatchRotateGesture(double mouseX, double mouseY, double rotation)
     {
-        System.out.println("Rotate: " + rotation);
+//        System.out.println("Rotate: " + rotation);
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        OSXGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, rotation);
+        OSXGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation));
     }
     
     
