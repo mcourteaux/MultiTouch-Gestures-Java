@@ -5,6 +5,9 @@
  */
 package com.martijncourteaux.osxgestures4java;
 
+import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
+import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
+
 /**
  *
  * @author martijn

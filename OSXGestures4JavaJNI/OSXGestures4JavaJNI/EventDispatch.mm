@@ -17,6 +17,10 @@ jclass jc_EventDispatch;
 jmethodID jm_dispatchMagnifyGesture;
 jmethodID jm_dispatchRotateGesture;
 
+CFMachPortRef eventTap;
+CFRunLoopRef runningLoop;
+bool running = false;
+
 
 NSEventMask eventMask =
 NSEventMaskGesture |
@@ -34,7 +38,7 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     if (!(eventMask & NSEventMaskFromType([event type]))) { return [event CGEvent]; }
     
     // do stuff
-   // NSLog(@"eventTapCallback: [event type] = %d", [event type]);
+    // NSLog(@"eventTapCallback: [event type] = %d", [event type]);
     
     NSPoint m = [NSEvent mouseLocation];
     
@@ -50,16 +54,22 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
             //NSLog(@"Buh: %f, %f", event.deltaX, event.deltaY);
             break;
         case NSEventTypeMagnify:
-            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchMagnifyGesture, (double) m.x, (double) m.y, event.magnification);
+            if (event.magnification != 0.0)
+            {
+                env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchMagnifyGesture, (double) m.x, (double) m.y, event.magnification);
+            }
             break;
         case NSEventTypeSwipe:
             NSLog(@"Swipe: X = %10.6f; Y = %10.6f", event.deltaX, event.deltaY);
             break;
         case NSEventTypeRotate:
-            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchRotateGesture, (double) m.x, (double) m.y, event.rotation);
+            if (event.rotation)
+            {
+                env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchRotateGesture, (double) m.x, (double) m.y, event.rotation);
+            }
             break;
         default:
-            NSLog(@"Gesture type: %d", [event type]);
+            NSLog(@"Gesture type: %lu", (unsigned long)[event type]);
             break;
     }
     
@@ -67,29 +77,40 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     return [event CGEvent];
 }
 
-void initCGEventTap() {
-    CFMachPortRef eventTap = CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, kCGEventTapOptionListenOnly, kCGEventMaskForAllEvents, eventTapCallback, nil);
-    CFRunLoopAddSource(CFRunLoopGetCurrent(), CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0), kCFRunLoopCommonModes);
-    CGEventTapEnable(eventTap, true);
-    CFRunLoopRun();
-}
-
-void loadJavaReferences(JNIEnv *env)
+void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_init(JNIEnv *env, jclass clazz)
 {
+    printf("Prepare JNI Gesture Listener.\n");
+    fflush(stdout);
     ::env = env;
-    jc_EventDispatch = env->FindClass("com/martijncourteaux/osxgestures4java/EventDispatch");
+    jc_EventDispatch = clazz;
     jm_dispatchMagnifyGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchMagnifyGesture", "(DDD)V");
     jm_dispatchRotateGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchRotateGesture", "(DDD)V");
 }
 
-void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_init(JNIEnv *env, jobject)
+void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_start(JNIEnv *env, jclass)
 {
-    printf("Init called!!!\n");
-    loadJavaReferences(env);
-    initCGEventTap();
+    printf("Starting JNI Gesture Listener Tap.\n");
+    fflush(stdout);
+    if (!running)
+    {
+        eventTap = CGEventTapCreate(kCGSessionEventTap, kCGHeadInsertEventTap, kCGEventTapOptionListenOnly, kCGEventMaskForAllEvents, eventTapCallback, nil);
+        CFRunLoopAddSource(CFRunLoopGetCurrent(), CFMachPortCreateRunLoopSource(kCFAllocatorDefault, eventTap, 0), kCFRunLoopCommonModes);
+        CGEventTapEnable(eventTap, true);
+        runningLoop = CFRunLoopGetCurrent();
+        CFRunLoopRun();
+        running = false;
+    }
 }
 
-void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_stop(JNIEnv *, jobject)
+void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_stop(JNIEnv *, jclass)
 {
-    printf("Stop called!\n");
+    printf("Stopping JNI Gesture Listener Tap.\n");
+    fflush(stdout);
+    
+    if (running)
+    {
+        running = false;
+        CFRunLoopStop(runningLoop);
+        CGEventTapEnable(eventTap, false);
+    }
 }

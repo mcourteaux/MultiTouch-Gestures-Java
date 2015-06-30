@@ -5,7 +5,17 @@
  */
 package com.martijncourteaux.osxgestures4java;
 
-import java.io.File;
+import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
+import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
+import java.awt.BasicStroke;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.geom.Line2D;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
 
 /**
  *
@@ -13,17 +23,57 @@ import java.io.File;
  */
 public class Main
 {
-    
-    public static void main(String[] args) {
-        System.out.println(new File(".").getAbsoluteFile());
-        EventDispatch d = new EventDispatch();
-        d.init();
-        
-        try {
-            Thread.sleep(5000);
-        } catch (Exception e) {
-        }
-        
-        d.stop();
+
+    private static double a = 0, l = 50;
+
+    public static void main(String[] args)
+    {
+
+        JFrame frame = new JFrame();
+        final JComponent comp = new JComponent()
+        {
+
+            @Override
+            protected void paintComponent(Graphics gg)
+            {
+                super.paintComponent(gg);
+                Graphics2D g = (Graphics2D) gg;
+
+                Line2D.Double line = new Line2D.Double(getWidth() * 0.5, getHeight() * 0.5, getWidth() * 0.5 + Math.cos(a) * l, getHeight() * 0.5 + Math.sin(a) * l);
+                g.setColor(Color.red);
+                g.setStroke(new BasicStroke(5.0f));
+                g.draw(line);
+            }
+
+        };
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(comp, BorderLayout.CENTER);
+        frame.setPreferredSize(new Dimension(300, 200));
+
+        frame.setLocationRelativeTo(null);
+        frame.pack();
+        frame.setVisible(true);
+        frame.repaint();
+
+        OSXGestureUtilities.addGestureListener(comp, new GestureAdapter()
+        {
+
+            @Override
+            public void magnify(MagnifyGestureEvent e)
+            {
+                System.out.println("In listenener: magnify");
+                l *= e.getMagnification();
+                comp.repaint();
+            }
+
+            @Override
+            public void rotate(RotateGestureEvent e)
+            {
+                System.out.println("In listenener: rotate");
+                a += e.getRotation();
+                comp.repaint();
+            }
+        });
     }
 }

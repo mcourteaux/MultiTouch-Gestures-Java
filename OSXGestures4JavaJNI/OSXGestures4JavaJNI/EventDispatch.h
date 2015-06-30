@@ -13,7 +13,15 @@ extern "C" {
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_init
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
+
+/*
+ * Class:     com_martijncourteaux_osxgestures4java_EventDispatch
+ * Method:    start
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_start
+  (JNIEnv *, jclass);
 
 /*
  * Class:     com_martijncourteaux_osxgestures4java_EventDispatch
@@ -21,7 +29,7 @@ JNIEXPORT void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_
  * Signature: ()V
  */
 JNIEXPORT void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_stop
-  (JNIEnv *, jobject);
+  (JNIEnv *, jclass);
 
 #ifdef __cplusplus
 }
