@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.martijncourteaux.osxgestures4java;
+package com.martijncourteaux.multitouchgestures;
 
-import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
-import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
+import com.martijncourteaux.multitouchgestures.event.MagnifyGestureEvent;
+import com.martijncourteaux.multitouchgestures.event.RotateGestureEvent;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -58,7 +58,7 @@ public class Main
         frame.repaint();
         
         System.out.println("Add gesture listener");
-        OSXGestureUtilities.addGestureListener(comp, new GestureAdapter()
+        MultiTouchGestureUtilities.addGestureListener(comp, new GestureAdapter()
         {
 
             @Override
@@ -75,6 +75,6 @@ public class Main
                 comp.repaint();
             }
         });
-        System.out.println("Added: " + OSXGestureUtilities.getListenerCount());
+        System.out.println("Added: " + MultiTouchGestureUtilities.getListenerCount());
     }
 }

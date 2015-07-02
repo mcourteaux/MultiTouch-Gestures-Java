@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.martijncourteaux.osxgestures4java;
+package com.martijncourteaux.multitouchgestures;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
@@ -59,7 +59,7 @@ class EventDispatch
             public void run()
             {
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-                OSXGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification);
+                MultiTouchGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification);
             }
         });
 
@@ -73,14 +73,22 @@ class EventDispatch
             public void run()
             {
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-                OSXGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation));
+                MultiTouchGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation));
             }
         });
     }
 
-    public static void dispatchScrollWheelEvent(double mouseX, double mouseY, double deltaX, double deltaY)
+    public static void dispatchScrollWheelEvent(final double mouseX, final double mouseY, final double deltaX, final double deltaY)
     {
-        System.out.println("Scroll: " + deltaX + " " + deltaY);
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+                MultiTouchGestureUtilities.dispatchScrollGesture(mouseX, d.height - mouseY, deltaX, deltaY);
+            }
+        });
     }
 
 }

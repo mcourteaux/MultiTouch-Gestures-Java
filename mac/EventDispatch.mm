@@ -36,10 +36,7 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     
     // filter out events which do not match the mask
     if (!(eventMask & NSEventMaskFromType([event type]))) { return [event CGEvent]; }
-    
-    // do stuff
-    // NSLog(@"eventTapCallback: [event type] = %d", [event type]);
-    
+
     NSPoint m = [NSEvent mouseLocation];
     
     switch ([event type])
@@ -68,11 +65,10 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
             break;
     }
     
-    // return the CGEventRef
     return [event CGEvent];
 }
 
-void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_init(JNIEnv *env, jclass clazz)
+void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_init(JNIEnv *env, jclass clazz)
 {
     printf("Prepare JNI Gesture Listener.\n");
     fflush(stdout);
@@ -83,7 +79,7 @@ void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_init(JNIEn
     jm_dispatchScrollWheelEvent = env->GetStaticMethodID(jc_EventDispatch, "dispatchScrollWheelEvent", "(DDDD)V");
 }
 
-void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_start(JNIEnv *env, jclass)
+void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_start(JNIEnv *env, jclass)
 {
     printf("Starting JNI Gesture Listener Tap.\n");
     fflush(stdout);
@@ -98,7 +94,7 @@ void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_start(JNIE
     }
 }
 
-void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_stop(JNIEnv *, jclass)
+void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_stop(JNIEnv *, jclass)
 {
     printf("Stopping JNI Gesture Listener Tap.\n");
     fflush(stdout);

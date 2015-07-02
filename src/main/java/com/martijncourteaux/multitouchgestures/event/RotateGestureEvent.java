@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.martijncourteaux.osxgestures4java.event;
+package com.martijncourteaux.multitouchgestures.event;
 
 import javax.swing.JComponent;
 

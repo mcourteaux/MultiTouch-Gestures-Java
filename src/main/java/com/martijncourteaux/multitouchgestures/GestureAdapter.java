@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.martijncourteaux.osxgestures4java;
+package com.martijncourteaux.multitouchgestures;
 
-import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
-import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
-import com.martijncourteaux.osxgestures4java.event.ScrollGestureEvent;
+import com.martijncourteaux.multitouchgestures.event.MagnifyGestureEvent;
+import com.martijncourteaux.multitouchgestures.event.RotateGestureEvent;
+import com.martijncourteaux.multitouchgestures.event.ScrollGestureEvent;
 
 /**
  *

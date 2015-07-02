@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1097172C1B42AAE2005A0E28 /* EventDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 1097172B1B42AAE2005A0E28 /* EventDispatch.h */; };
-		1097172E1B42ABDE005A0E28 /* libOSXGestures4JavaJNI.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		109717301B42AE7F005A0E28 /* EventDispatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1097172F1B42AE7F005A0E28 /* EventDispatch.mm */; };
+		1020E4DB1B4575BC008E4CB3 /* EventDispatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 1020E4D91B4575BC008E4CB3 /* EventDispatch.h */; };
+		1020E4DC1B4575BC008E4CB3 /* EventDispatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1020E4DA1B4575BC008E4CB3 /* EventDispatch.mm */; };
+		1097172E1B42ABDE005A0E28 /* libmtg_mac.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = 109717121B42AA96005A0E28 /* libmtg_mac.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		109717321B42AFCD005A0E28 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717311B42AFCD005A0E28 /* Cocoa.framework */; };
 		109717351B42AFE6005A0E28 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717331B42AFE6005A0E28 /* CoreFoundation.framework */; };
 		109717361B42AFE6005A0E28 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 109717341B42AFE6005A0E28 /* Foundation.framework */; };
@@ -23,16 +23,16 @@
 			dstPath = "$(PROJECT_DIR)/..";
 			dstSubfolderSpec = 0;
 			files = (
-				1097172E1B42ABDE005A0E28 /* libOSXGestures4JavaJNI.dylib in CopyFiles */,
+				1097172E1B42ABDE005A0E28 /* libmtg_mac.dylib in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libOSXGestures4JavaJNI.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
-		1097172B1B42AAE2005A0E28 /* EventDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatch.h; sourceTree = "<group>"; };
-		1097172F1B42AE7F005A0E28 /* EventDispatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EventDispatch.mm; sourceTree = "<group>"; };
+		1020E4D91B4575BC008E4CB3 /* EventDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDispatch.h; sourceTree = SOURCE_ROOT; };
+		1020E4DA1B4575BC008E4CB3 /* EventDispatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EventDispatch.mm; sourceTree = SOURCE_ROOT; };
+		109717121B42AA96005A0E28 /* libmtg_mac.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libmtg_mac.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		109717311B42AFCD005A0E28 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		109717331B42AFE6005A0E28 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		109717341B42AFE6005A0E28 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,7 +61,7 @@
 				109717331B42AFE6005A0E28 /* CoreFoundation.framework */,
 				109717341B42AFE6005A0E28 /* Foundation.framework */,
 				109717311B42AFCD005A0E28 /* Cocoa.framework */,
-				109717141B42AA96005A0E28 /* OSXGestures4JavaJNI */,
+				109717141B42AA96005A0E28 /* src */,
 				109717131B42AA96005A0E28 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,17 +69,18 @@
 		109717131B42AA96005A0E28 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */,
+				109717121B42AA96005A0E28 /* libmtg_mac.dylib */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		109717141B42AA96005A0E28 /* OSXGestures4JavaJNI */ = {
+		109717141B42AA96005A0E28 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				1097172B1B42AAE2005A0E28 /* EventDispatch.h */,
-				1097172F1B42AE7F005A0E28 /* EventDispatch.mm */,
+				1020E4D91B4575BC008E4CB3 /* EventDispatch.h */,
+				1020E4DA1B4575BC008E4CB3 /* EventDispatch.mm */,
 			);
+			name = src;
 			path = OSXGestures4JavaJNI;
 			sourceTree = "<group>";
 		};
@@ -90,16 +91,16 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1097172C1B42AAE2005A0E28 /* EventDispatch.h in Headers */,
+				1020E4DB1B4575BC008E4CB3 /* EventDispatch.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		109717111B42AA96005A0E28 /* OSXGestures4JavaJNI */ = {
+		109717111B42AA96005A0E28 /* mtg_mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 109717251B42AA96005A0E28 /* Build configuration list for PBXNativeTarget "OSXGestures4JavaJNI" */;
+			buildConfigurationList = 109717251B42AA96005A0E28 /* Build configuration list for PBXNativeTarget "mtg_mac" */;
 			buildPhases = (
 				1097170E1B42AA96005A0E28 /* Sources */,
 				1097170F1B42AA96005A0E28 /* Frameworks */,
@@ -110,9 +111,9 @@
 			);
 			dependencies = (
 			);
-			name = OSXGestures4JavaJNI;
+			name = mtg_mac;
 			productName = OSXGestures4JavaJNI;
-			productReference = 109717121B42AA96005A0E28 /* libOSXGestures4JavaJNI.dylib */;
+			productReference = 109717121B42AA96005A0E28 /* libmtg_mac.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
 /* End PBXNativeTarget section */
@@ -129,7 +130,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 1097170D1B42AA96005A0E28 /* Build configuration list for PBXProject "OSXGestures4JavaJNI" */;
+			buildConfigurationList = 1097170D1B42AA96005A0E28 /* Build configuration list for PBXProject "mtg_mac" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -141,7 +142,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				109717111B42AA96005A0E28 /* OSXGestures4JavaJNI */,
+				109717111B42AA96005A0E28 /* mtg_mac */,
 			);
 		};
 /* End PBXProject section */
@@ -151,7 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				109717301B42AE7F005A0E28 /* EventDispatch.mm in Sources */,
+				1020E4DC1B4575BC008E4CB3 /* EventDispatch.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -242,7 +243,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/JavaVM.framework/Versions/Current/Headers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = mtg_mac;
 			};
 			name = Debug;
 		};
@@ -253,14 +254,14 @@
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
 				HEADER_SEARCH_PATHS = /System/Library/Frameworks/JavaVM.framework/Versions/Current/Headers;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = mtg_mac;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1097170D1B42AA96005A0E28 /* Build configuration list for PBXProject "OSXGestures4JavaJNI" */ = {
+		1097170D1B42AA96005A0E28 /* Build configuration list for PBXProject "mtg_mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				109717231B42AA96005A0E28 /* Debug */,
@@ -269,13 +270,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		109717251B42AA96005A0E28 /* Build configuration list for PBXNativeTarget "OSXGestures4JavaJNI" */ = {
+		109717251B42AA96005A0E28 /* Build configuration list for PBXNativeTarget "mtg_mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				109717261B42AA96005A0E28 /* Debug */,
 				109717271B42AA96005A0E28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
