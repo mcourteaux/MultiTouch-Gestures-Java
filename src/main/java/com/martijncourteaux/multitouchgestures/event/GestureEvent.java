@@ -13,17 +13,46 @@ import javax.swing.JComponent;
  */
 public class GestureEvent
 {
+    
+    public enum Phase
+    {
+        MOMENTUM(0), BEGIN(1), CHANGED(2), END(3), CANCELLED(4), OTHER(-1);
+        
+        private final int code;
+
+        private Phase(int code)
+        {
+            this.code = code;
+        }
+
+        public int getCode()
+        {
+            return code;
+        }
+        
+        public static Phase getByCode(int code)
+        {
+            for (Phase p : values())
+            {
+                if (p.getCode() == code) return p;
+            }
+            return OTHER;
+        }
+    }
+    
     private final JComponent source;
     private final double mouseX, mouseY;
     private final double absMouseX, absMouseY;
+    private final Phase phase;
 
-    public GestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY)
+    public GestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, Phase phase)
     {
         this.source = source;
         this.mouseX = mouseX;
         this.mouseY = mouseY;
         this.absMouseX = absMouseX;
         this.absMouseY = absMouseY;
+        this.phase = phase;
     }
 
     public JComponent getSource()
@@ -50,5 +79,9 @@ public class GestureEvent
     {
         return absMouseY;
     }
-    
+
+    public Phase getPhase()
+    {
+        return phase;
+    }
 }

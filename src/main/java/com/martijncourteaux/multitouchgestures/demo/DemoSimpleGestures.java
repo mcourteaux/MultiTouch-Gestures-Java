@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.martijncourteaux.multitouchgestures;
+package com.martijncourteaux.multitouchgestures.demo;
 
+import com.martijncourteaux.multitouchgestures.GestureAdapter;
+import com.martijncourteaux.multitouchgestures.MultiTouchGestureUtilities;
 import com.martijncourteaux.multitouchgestures.event.MagnifyGestureEvent;
 import com.martijncourteaux.multitouchgestures.event.RotateGestureEvent;
+import com.martijncourteaux.multitouchgestures.event.ScrollGestureEvent;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -21,16 +24,17 @@ import javax.swing.JFrame;
  *
  * @author martijn
  */
-public class Main
+public class DemoSimpleGestures
 {
 
     private static double a = 0, l = 50;
-
+    private static double x, y;
+    
     public static void main(String[] args)
     {
 
         JFrame frame = new JFrame();
-        frame.setTitle("OS X Trackpad Gestures demo");
+        frame.setTitle("MultiTouch Gestures Demo");
         final JComponent comp = new JComponent()
         {
 
@@ -40,7 +44,7 @@ public class Main
                 super.paintComponent(gg);
                 Graphics2D g = (Graphics2D) gg;
 
-                Line2D.Double line = new Line2D.Double(getWidth() * 0.5, getHeight() * 0.5, getWidth() * 0.5 + Math.cos(a) * l, getHeight() * 0.5 + Math.sin(a) * l);
+                Line2D.Double line = new Line2D.Double(getWidth() * 0.5 + x, getHeight() * 0.5 + y, getWidth() * 0.5 + Math.cos(a) * l + x, getHeight() * 0.5 + Math.sin(a) * l + y);
                 g.setColor(Color.red);
                 g.setStroke(new BasicStroke(5.0f));
                 g.draw(line);
@@ -55,9 +59,7 @@ public class Main
         frame.setLocationRelativeTo(null);
         frame.pack();
         frame.setVisible(true);
-        frame.repaint();
         
-        System.out.println("Add gesture listener");
         MultiTouchGestureUtilities.addGestureListener(comp, new GestureAdapter()
         {
 
@@ -74,7 +76,15 @@ public class Main
                 a += e.getRotation();
                 comp.repaint();
             }
+
+            @Override
+            public void scroll(ScrollGestureEvent e)
+            {
+                x += e.getDeltaX();
+                y += e.getDeltaY();
+                comp.repaint();
+            }
+            
         });
-        System.out.println("Added: " + MultiTouchGestureUtilities.getListenerCount());
     }
 }

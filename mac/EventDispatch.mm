@@ -22,6 +22,24 @@ CFMachPortRef eventTap;
 CFRunLoopRef runningLoop;
 bool running = false;
 
+int convertCocoaPhaseToJavaPhase(NSEventPhase phase)
+{
+    switch (phase)
+    {
+        case NSEventPhaseNone:
+            return 0;
+        case NSEventPhaseBegan:
+            return 1;
+        case NSEventPhaseChanged:
+            return 2;
+        case NSEventPhaseEnded:
+            return 3;
+        case NSEventPhaseCancelled:
+            return 4;
+    }
+    return -1;
+}
+
 
 NSEventMask eventMask =
 NSEventMaskGesture |
@@ -43,7 +61,7 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     {
         case NSEventTypeMagnify:
         {
-            int phase = (int) [event phase];
+            int phase = convertCocoaPhaseToJavaPhase([event phase]);
             env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchMagnifyGesture, (double) m.x, (double) m.y, event.magnification, phase);
             break;
         }
@@ -52,13 +70,14 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
             break;
         case NSEventTypeRotate:
         {
-            int phase = (int) [event phase];
+            int phase = convertCocoaPhaseToJavaPhase([event phase]);
             env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchRotateGesture, (double) m.x, (double) m.y, event.rotation, phase);
             break;
         }
         case NSScrollWheel:
         {
-            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchScrollWheelEvent, (double) m.x, (double) m.y, event.scrollingDeltaX, event.scrollingDeltaY);
+            int phase = convertCocoaPhaseToJavaPhase([event phase]);
+            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchScrollWheelEvent, (double) m.x, (double) m.y, event.scrollingDeltaX, event.scrollingDeltaY, phase);
             break;
         }
         default:
@@ -70,18 +89,18 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
 
 void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_init(JNIEnv *env, jclass clazz)
 {
-    printf("Prepare JNI Gesture Listener.\n");
+    printf("NATIVE] Prepare JNI Gesture Listener.\n");
     fflush(stdout);
     ::env = env;
     jc_EventDispatch = clazz;
     jm_dispatchMagnifyGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchMagnifyGesture", "(DDDI)V");
     jm_dispatchRotateGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchRotateGesture", "(DDDI)V");
-    jm_dispatchScrollWheelEvent = env->GetStaticMethodID(jc_EventDispatch, "dispatchScrollWheelEvent", "(DDDD)V");
+    jm_dispatchScrollWheelEvent = env->GetStaticMethodID(jc_EventDispatch, "dispatchScrollWheelEvent", "(DDDDI)V");
 }
 
 void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_start(JNIEnv *env, jclass)
 {
-    printf("Starting JNI Gesture Listener Tap.\n");
+    printf("[NATIVE] Starting JNI Gesture Listener Tap.\n");
     fflush(stdout);
     if (!running)
     {
@@ -96,7 +115,7 @@ void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_start(JN
 
 void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_stop(JNIEnv *, jclass)
 {
-    printf("Stopping JNI Gesture Listener Tap.\n");
+    printf("NATIVE] Stopping JNI Gesture Listener Tap.\n");
     fflush(stdout);
     
     if (running)

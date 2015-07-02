@@ -15,9 +15,9 @@ public class MagnifyGestureEvent extends GestureEvent
 {
     private final double magnification;
 
-    public MagnifyGestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, double magnification)
+    public MagnifyGestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, Phase phase, double magnification)
     {
-        super(source, mouseX, mouseY, absMouseX, absMouseY);
+        super(source, mouseX, mouseY, absMouseX, absMouseY, phase);
         this.magnification = magnification;
     }
 

@@ -16,9 +16,9 @@ public class RotateGestureEvent extends GestureEvent
     
     private final double rotation;
 
-    public RotateGestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, double rotation)
+    public RotateGestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, Phase phase, double rotation)
     {
-        super(source, mouseX, mouseY, absMouseX, absMouseY);
+        super(source, mouseX, mouseY, absMouseX, absMouseY, phase);
         this.rotation = rotation;
     }
 

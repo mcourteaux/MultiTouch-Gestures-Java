@@ -15,9 +15,9 @@ public class ScrollGestureEvent extends GestureEvent
 {
     private final double dX, dY;
 
-    public ScrollGestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, double dX, double dY)
+    public ScrollGestureEvent(JComponent source, double mouseX, double mouseY, double absMouseX, double absMouseY, Phase phase, double dX, double dY)
     {
-        super(source, mouseX, mouseY, absMouseX, absMouseY);
+        super(source, mouseX, mouseY, absMouseX, absMouseY, phase);
         this.dX = dX;
         this.dY = dY;
     }

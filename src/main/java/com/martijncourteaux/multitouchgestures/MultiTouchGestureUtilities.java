@@ -5,6 +5,7 @@
  */
 package com.martijncourteaux.multitouchgestures;
 
+import com.martijncourteaux.multitouchgestures.event.GestureEvent;
 import com.martijncourteaux.multitouchgestures.event.MagnifyGestureEvent;
 import com.martijncourteaux.multitouchgestures.event.RotateGestureEvent;
 import com.martijncourteaux.multitouchgestures.event.ScrollGestureEvent;
@@ -80,7 +81,7 @@ public class MultiTouchGestureUtilities
         return false;
     }
     
-    protected static void dispatchMagnifyGesture(double mouseX, double mouseY, double magnification)
+    protected static void dispatchMagnifyGesture(double mouseX, double mouseY, double magnification, GestureEvent.Phase phase)
     {
         if (listenerCount == 0) return;
         
@@ -97,7 +98,7 @@ public class MultiTouchGestureUtilities
                 
                 Point relP = c.getMousePosition(true);
                 
-                MagnifyGestureEvent me = new MagnifyGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, magnification);
+                MagnifyGestureEvent me = new MagnifyGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, magnification);
                 
                 for (GestureListener l : list)
                 {
@@ -109,7 +110,7 @@ public class MultiTouchGestureUtilities
         }
     }
     
-    protected static void dispatchRotateGesture(double mouseX, double mouseY, double rotation)
+    protected static void dispatchRotateGesture(double mouseX, double mouseY, double rotation, GestureEvent.Phase phase)
     {
         if (listenerCount == 0) return;
         
@@ -127,7 +128,7 @@ public class MultiTouchGestureUtilities
                 
                 Point relP = c.getMousePosition(true);
                 
-                RotateGestureEvent re = new RotateGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, rotation);
+                RotateGestureEvent re = new RotateGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, rotation);
                 
                 for (GestureListener l : list)
                 {
@@ -139,7 +140,7 @@ public class MultiTouchGestureUtilities
         }
     }
         
-    protected static void dispatchScrollGesture(double mouseX, double mouseY, double dX, double dY)
+    protected static void dispatchScrollGesture(double mouseX, double mouseY, double dX, double dY, GestureEvent.Phase phase)
     {
         if (listenerCount == 0) return;
         
@@ -156,7 +157,7 @@ public class MultiTouchGestureUtilities
                 
                 Point relP = c.getMousePosition(true);
                 
-                ScrollGestureEvent se = new ScrollGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, dX, dY);
+                ScrollGestureEvent se = new ScrollGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, dX, dY);
                 
                 for (GestureListener l : list)
                 {

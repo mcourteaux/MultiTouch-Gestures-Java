@@ -5,6 +5,7 @@
  */
 package com.martijncourteaux.multitouchgestures;
 
+import com.martijncourteaux.multitouchgestures.event.GestureEvent.Phase;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.SwingUtilities;
@@ -20,7 +21,14 @@ class EventDispatch
 
     static
     {
-        System.loadLibrary("OSXGestures4JavaJNI");
+        String os = System.getProperty("os.name").toLowerCase();
+        if (os.contains("mac os x"))
+        {
+            System.loadLibrary("mtg_mac");
+        } else
+        {
+            throw new RuntimeException("Only Mac OS X is supported at the moment.");
+        }
     }
 
     public static native void init();
@@ -59,7 +67,7 @@ class EventDispatch
             public void run()
             {
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-                MultiTouchGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification);
+                MultiTouchGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification, Phase.getByCode(phase));
             }
         });
 
@@ -73,12 +81,12 @@ class EventDispatch
             public void run()
             {
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-                MultiTouchGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation));
+                MultiTouchGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation), Phase.getByCode(phase));
             }
         });
     }
 
-    public static void dispatchScrollWheelEvent(final double mouseX, final double mouseY, final double deltaX, final double deltaY)
+    public static void dispatchScrollWheelEvent(final double mouseX, final double mouseY, final double deltaX, final double deltaY, final int phase)
     {
         SwingUtilities.invokeLater(new Runnable()
         {
@@ -86,7 +94,7 @@ class EventDispatch
             public void run()
             {
                 Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-                MultiTouchGestureUtilities.dispatchScrollGesture(mouseX, d.height - mouseY, deltaX, deltaY);
+                MultiTouchGestureUtilities.dispatchScrollGesture(mouseX, d.height - mouseY, deltaX, deltaY, Phase.getByCode(phase));
             }
         });
     }
