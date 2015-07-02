@@ -7,6 +7,7 @@ package com.martijncourteaux.osxgestures4java;
 
 import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
 import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
+import com.martijncourteaux.osxgestures4java.event.ScrollGestureEvent;
 
 /**
  *
@@ -24,4 +25,11 @@ public abstract class GestureAdapter implements GestureListener
     public void rotate(RotateGestureEvent e)
     {
     }
+
+    @Override
+    public void scroll(ScrollGestureEvent e)
+    {
+    }
+    
+    
 }

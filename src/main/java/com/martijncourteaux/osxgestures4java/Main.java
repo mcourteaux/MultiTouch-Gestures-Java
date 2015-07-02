@@ -30,6 +30,7 @@ public class Main
     {
 
         JFrame frame = new JFrame();
+        frame.setTitle("OS X Trackpad Gestures demo");
         final JComponent comp = new JComponent()
         {
 
@@ -63,7 +64,6 @@ public class Main
             @Override
             public void magnify(MagnifyGestureEvent e)
             {
-                System.out.println("In listenener: magnify");
                 l *= 1.0 + e.getMagnification();
                 comp.repaint();
             }
@@ -71,7 +71,6 @@ public class Main
             @Override
             public void rotate(RotateGestureEvent e)
             {
-                System.out.println("In listenener: rotate");
                 a += e.getRotation();
                 comp.repaint();
             }

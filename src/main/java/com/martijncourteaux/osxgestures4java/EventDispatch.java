@@ -7,26 +7,28 @@ package com.martijncourteaux.osxgestures4java;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author martijn
  */
 class EventDispatch
-{    
+{
+
     private static Thread gestureEventThread;
-    
+
     static
     {
         System.loadLibrary("OSXGestures4JavaJNI");
     }
-    
+
     public static native void init();
-    
+
     private static native void start();
-    
+
     public static native void stop();
-    
+
     public static void startInSeperateThread()
     {
         if (gestureEventThread != null)
@@ -36,7 +38,7 @@ class EventDispatch
                 return;
             }
         }
-        
+
         gestureEventThread = new Thread(new Runnable()
         {
             @Override
@@ -48,20 +50,37 @@ class EventDispatch
         }, "Gesture Event Thread");
         gestureEventThread.start();
     }
-    
-    public static void dispatchMagnifyGesture(double mouseX, double mouseY, double magnification)
+
+    public static void dispatchMagnifyGesture(final double mouseX, final double mouseY, final double magnification, final int phase)
     {
-//        System.out.println("Magnify: " + magnification);
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        OSXGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification);
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+                OSXGestureUtilities.dispatchMagnifyGesture(mouseX, d.height - mouseY, magnification);
+            }
+        });
+
     }
-    
-    public static void dispatchRotateGesture(double mouseX, double mouseY, double rotation)
+
+    public static void dispatchRotateGesture(final double mouseX, final double mouseY, final double rotation, final int phase)
     {
-//        System.out.println("Rotate: " + rotation);
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
-        OSXGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation));
+        SwingUtilities.invokeLater(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+                OSXGestureUtilities.dispatchRotateGesture(mouseX, d.height - mouseY, -Math.toRadians(rotation));
+            }
+        });
     }
-    
-    
+
+    public static void dispatchScrollWheelEvent(double mouseX, double mouseY, double deltaX, double deltaY)
+    {
+        System.out.println("Scroll: " + deltaX + " " + deltaY);
+    }
+
 }

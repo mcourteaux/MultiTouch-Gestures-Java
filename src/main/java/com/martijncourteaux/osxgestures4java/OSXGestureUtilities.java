@@ -7,6 +7,7 @@ package com.martijncourteaux.osxgestures4java;
 
 import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
 import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
+import com.martijncourteaux.osxgestures4java.event.ScrollGestureEvent;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.ArrayList;
@@ -137,4 +138,34 @@ public class OSXGestureUtilities
             }
         }
     }
+        
+    protected static void dispatchScrollGesture(double mouseX, double mouseY, double dX, double dY)
+    {
+        if (listenerCount == 0) return;
+        
+        int mXi = (int) Math.round(mouseX);
+        int mYi = (int) Math.round(mouseY);
+        
+        for (HashMap.Entry<JComponent, List<GestureListener>> e : listeners.entrySet())
+        {
+            JComponent c = e.getKey();
+            Rectangle r = new Rectangle(c.getLocationOnScreen(), c.getSize());
+            if (r.contains(mXi, mYi))
+            {
+                List<GestureListener> list = e.getValue();
+                
+                Point relP = c.getMousePosition(true);
+                
+                ScrollGestureEvent se = new ScrollGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, dX, dY);
+                
+                for (GestureListener l : list)
+                {
+                    l.scroll(se);
+                }
+                
+                return;
+            }
+        }
+    }
+    
 }

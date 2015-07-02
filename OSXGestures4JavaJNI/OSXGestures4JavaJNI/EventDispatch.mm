@@ -16,6 +16,7 @@ JNIEnv *env;
 jclass jc_EventDispatch;
 jmethodID jm_dispatchMagnifyGesture;
 jmethodID jm_dispatchRotateGesture;
+jmethodID jm_dispatchScrollWheelEvent;
 
 CFMachPortRef eventTap;
 CFRunLoopRef runningLoop;
@@ -27,8 +28,7 @@ NSEventMaskGesture |
 NSEventMaskMagnify|
 NSEventMaskSwipe |
 NSEventMaskRotate |
-NSEventMaskBeginGesture |
-NSEventMaskEndGesture;
+NSScrollWheelMask;
 
 CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef eventRef, void *refcon) {
     // convert the CGEventRef to an NSEvent
@@ -44,32 +44,27 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
     
     switch ([event type])
     {
-        case NSEventTypeBeginGesture:
-            NSLog(@"Event begin");
-            break;
-        case NSEventTypeEndGesture:
-            NSLog(@"Gesture end");
-            break;
-        case NSEventTypeGesture:
-            //NSLog(@"Buh: %f, %f", event.deltaX, event.deltaY);
-            break;
         case NSEventTypeMagnify:
-            if (event.magnification != 0.0)
-            {
-                env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchMagnifyGesture, (double) m.x, (double) m.y, event.magnification);
-            }
+        {
+            int phase = (int) [event phase];
+            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchMagnifyGesture, (double) m.x, (double) m.y, event.magnification, phase);
             break;
+        }
         case NSEventTypeSwipe:
             NSLog(@"Swipe: X = %10.6f; Y = %10.6f", event.deltaX, event.deltaY);
             break;
         case NSEventTypeRotate:
-            if (event.rotation)
-            {
-                env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchRotateGesture, (double) m.x, (double) m.y, event.rotation);
-            }
+        {
+            int phase = (int) [event phase];
+            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchRotateGesture, (double) m.x, (double) m.y, event.rotation, phase);
             break;
+        }
+        case NSScrollWheel:
+        {
+            env->CallStaticVoidMethod(jc_EventDispatch, jm_dispatchScrollWheelEvent, (double) m.x, (double) m.y, event.scrollingDeltaX, event.scrollingDeltaY);
+            break;
+        }
         default:
-            NSLog(@"Gesture type: %lu", (unsigned long)[event type]);
             break;
     }
     
@@ -83,8 +78,9 @@ void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_init(JNIEn
     fflush(stdout);
     ::env = env;
     jc_EventDispatch = clazz;
-    jm_dispatchMagnifyGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchMagnifyGesture", "(DDD)V");
-    jm_dispatchRotateGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchRotateGesture", "(DDD)V");
+    jm_dispatchMagnifyGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchMagnifyGesture", "(DDDI)V");
+    jm_dispatchRotateGesture = env->GetStaticMethodID(jc_EventDispatch, "dispatchRotateGesture", "(DDDI)V");
+    jm_dispatchScrollWheelEvent = env->GetStaticMethodID(jc_EventDispatch, "dispatchScrollWheelEvent", "(DDDD)V");
 }
 
 void JNICALL Java_com_martijncourteaux_osxgestures4java_EventDispatch_start(JNIEnv *env, jclass)

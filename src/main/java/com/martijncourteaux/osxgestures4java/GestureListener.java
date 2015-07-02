@@ -7,6 +7,7 @@ package com.martijncourteaux.osxgestures4java;
 
 import com.martijncourteaux.osxgestures4java.event.MagnifyGestureEvent;
 import com.martijncourteaux.osxgestures4java.event.RotateGestureEvent;
+import com.martijncourteaux.osxgestures4java.event.ScrollGestureEvent;
 
 /**
  *
@@ -17,4 +18,6 @@ public interface GestureListener
     public void magnify(MagnifyGestureEvent e);
     
     public void rotate(RotateGestureEvent e);
+    
+    public void scroll(ScrollGestureEvent e);
 }
