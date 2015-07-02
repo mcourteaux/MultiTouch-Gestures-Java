@@ -54,6 +54,18 @@ Where each event type has these parameters:
  - `mouseX`: y-coordinate of the mouse in the component space.
  - `absMouseX`: x-coordinate of the mouse on the screen
  - `absMouseY`: y-coordinate of the mouse on the screen
+ - `phase`: a `GesturePhase` enum indicating what phase the gesture is in.
+
+A `GesturePhase` is an enum containing these values:
+
+ - `MOMENTUM`: Indicates this event is caused by momentum (like OS X).
+ - `BEGIN`: The gesture just began.
+ - `CHANGED`: The gesture updated (e.g.: rotating, zooming)
+ - `END`: The gesture ended.
+ - `CANCELLED`: The gesture was cancelled due to some popup or other thing.
+ - `OTHER`: Any other reason for an event. Most of the time this will be errornous.
+
+**Remark**: On OS X, the `MOMENTUM` events come after the `END` event.
 
 Remark for OS X
 ---------------
