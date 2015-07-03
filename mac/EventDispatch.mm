@@ -89,7 +89,7 @@ CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef 
 
 void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_init(JNIEnv *env, jclass clazz)
 {
-    printf("NATIVE] Prepare JNI Gesture Listener.\n");
+    printf("[NATIVE] Prepare JNI Gesture Listener.\n");
     fflush(stdout);
     ::env = env;
     jc_EventDispatch = clazz;
@@ -115,7 +115,7 @@ void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_start(JN
 
 void JNICALL Java_com_martijncourteaux_multitouchgestures_EventDispatch_stop(JNIEnv *, jclass)
 {
-    printf("NATIVE] Stopping JNI Gesture Listener Tap.\n");
+    printf("[NATIVE] Stopping JNI Gesture Listener Tap.\n");
     fflush(stdout);
     
     if (running)

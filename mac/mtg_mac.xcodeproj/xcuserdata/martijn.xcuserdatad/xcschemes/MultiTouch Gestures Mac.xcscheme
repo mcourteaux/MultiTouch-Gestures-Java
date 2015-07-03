@@ -28,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "1097171C1B42AA96005A0E28"
-               BuildableName = "OSXGestures4JavaJNITests.xctest"
-               BlueprintName = "OSXGestures4JavaJNITests"
-               ReferencedContainer = "container:mtg_mac.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

@@ -20,7 +20,7 @@
 		1097172D1B42ABD4005A0E28 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "$(PROJECT_DIR)/..";
+			dstPath = "$(PROJECT_DIR)/../src/main/resources/com/martijncourteaux/multitouchgestures";
 			dstSubfolderSpec = 0;
 			files = (
 				1097172E1B42ABDE005A0E28 /* libmtg_mac.dylib in CopyFiles */,

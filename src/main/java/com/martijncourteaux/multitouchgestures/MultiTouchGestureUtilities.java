@@ -21,21 +21,6 @@ import java.util.List;
  */
 public class MultiTouchGestureUtilities
 {
-    
-    static
-    {
-        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                System.out.println("In shutdownhook. Stopping Event Tap.");
-                EventDispatch.stop();
-            }
-        }));
-    }
-    
     private final static HashMap<JComponent, List<GestureListener>> listeners = new HashMap<JComponent, List<GestureListener>>();
     private static int listenerCount = 0;
 
