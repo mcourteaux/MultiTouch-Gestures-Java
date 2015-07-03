@@ -27,7 +27,7 @@ class EventDispatch
             System.loadLibrary("mtg_mac");
         } else
         {
-            throw new RuntimeException("Only Mac OS X is supported at the moment.");
+            System.out.println("[MULTITOUCH GESTURES] Only Mac OS X is supported at the moment.");
         }
     }
 
