@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "109717111B42AA96005A0E28"
-               BuildableName = "libMultiTouchGestures OSX.dylib"
+               BuildableName = "libmtg_mac.dylib"
                BlueprintName = "mtg_mac"
                ReferencedContainer = "container:mtg_mac.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "109717111B42AA96005A0E28"
-            BuildableName = "libMultiTouchGestures OSX.dylib"
+            BuildableName = "libmtg_mac.dylib"
             BlueprintName = "mtg_mac"
             ReferencedContainer = "container:mtg_mac.xcodeproj">
          </BuildableReference>
@@ -55,7 +55,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "109717111B42AA96005A0E28"
-            BuildableName = "libMultiTouchGestures OSX.dylib"
+            BuildableName = "libmtg_mac.dylib"
             BlueprintName = "mtg_mac"
             ReferencedContainer = "container:mtg_mac.xcodeproj">
          </BuildableReference>
@@ -73,7 +73,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "109717111B42AA96005A0E28"
-            BuildableName = "libMultiTouchGestures OSX.dylib"
+            BuildableName = "libmtg_mac.dylib"
             BlueprintName = "mtg_mac"
             ReferencedContainer = "container:mtg_mac.xcodeproj">
          </BuildableReference>
