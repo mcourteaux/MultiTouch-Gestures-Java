@@ -11,7 +11,6 @@ import com.martijncourteaux.multitouchgestures.event.RotateGestureEvent;
 import com.martijncourteaux.multitouchgestures.event.ScrollGestureEvent;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JComponent;
 import java.util.List;
@@ -24,7 +23,7 @@ import javax.swing.SwingUtilities;
 public class MultiTouchGestureUtilities
 {
 
-    private final static HashMap<JComponent, List<GestureListener>> listeners = new HashMap<JComponent, List<GestureListener>>();
+    private final static HashMap<JComponent, MultiTouchClient> clients = new HashMap<JComponent, MultiTouchClient>();
     private static int listenerCount = 0;
 
     public static int getListenerCount()
@@ -38,12 +37,14 @@ public class MultiTouchGestureUtilities
         {
             EventDispatch.startInSeperateThread();
         }
-        List<GestureListener> list = listeners.get(component);
-        if (list == null)
+        MultiTouchClient client = clients.get(component);
+        if (client == null)
         {
-            list = new ArrayList<GestureListener>();
-            listeners.put(component, list);
+            client = new MultiTouchClient(component);
+            client.attachListeners();
+            clients.put(component, client);
         }
+        List<GestureListener> list = client.getListeners();
 
         list.add(listener);
         listenerCount++;
@@ -51,7 +52,12 @@ public class MultiTouchGestureUtilities
 
     public static boolean removeGestureListener(JComponent component, GestureListener listener)
     {
-        List<GestureListener> list = listeners.get(component);
+        MultiTouchClient client = clients.get(component);
+        if (client == null)
+        {
+            return false;
+        }
+        List<GestureListener> list = client.getListeners();
         if (list == null)
         {
             return false;
@@ -59,6 +65,10 @@ public class MultiTouchGestureUtilities
 
         if (list.remove(listener))
         {
+            if (list.isEmpty())
+            {
+                client.detachListeners();
+            }
             listenerCount--;
             if (listenerCount == 0)
             {
@@ -79,26 +89,30 @@ public class MultiTouchGestureUtilities
         int mXi = (int) Math.round(mouseX);
         int mYi = (int) Math.round(mouseY);
 
-        for (HashMap.Entry<JComponent, List<GestureListener>> e : listeners.entrySet())
+        for (HashMap.Entry<JComponent, MultiTouchClient> e : clients.entrySet())
         {
             JComponent c = e.getKey();
             Rectangle r = new Rectangle(c.getLocationOnScreen(), c.getSize());
             if (r.contains(mXi, mYi))
             {
-                List<GestureListener> list = e.getValue();
-
-                Point relP = new Point(mXi, mYi);
-                SwingUtilities.convertPointFromScreen(relP, c);
+                MultiTouchClient client = e.getValue();
+                if (client.isInside())
                 {
-                    MagnifyGestureEvent me = new MagnifyGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, magnification);
+                    List<GestureListener> list = client.getListeners();
 
-                    for (GestureListener l : list)
+                    Point relP = new Point(mXi, mYi);
+                    SwingUtilities.convertPointFromScreen(relP, c);
                     {
-                        l.magnify(me);
-                    }
-                }
+                        MagnifyGestureEvent me = new MagnifyGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, magnification);
 
-                return;
+                        for (GestureListener l : list)
+                        {
+                            l.magnify(me);
+                        }
+                    }
+
+                    return;
+                }
             }
         }
     }
@@ -113,26 +127,30 @@ public class MultiTouchGestureUtilities
         int mXi = (int) Math.round(mouseX);
         int mYi = (int) Math.round(mouseY);
 
-        for (HashMap.Entry<JComponent, List<GestureListener>> e : listeners.entrySet())
+        for (HashMap.Entry<JComponent, MultiTouchClient> e : clients.entrySet())
         {
             JComponent c = e.getKey();
             Rectangle r = new Rectangle(c.getLocationOnScreen(), c.getSize());
             if (r.contains(mXi, mYi))
             {
-                List<GestureListener> list = e.getValue();
-
-                Point relP = new Point(mXi, mYi);
-                SwingUtilities.convertPointFromScreen(relP, c);
+                MultiTouchClient client = e.getValue();
+                if (client.isInside())
                 {
-                    RotateGestureEvent re = new RotateGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, rotation);
+                    List<GestureListener> list = client.getListeners();
 
-                    for (GestureListener l : list)
+                    Point relP = new Point(mXi, mYi);
+                    SwingUtilities.convertPointFromScreen(relP, c);
                     {
-                        l.rotate(re);
-                    }
-                }
+                        RotateGestureEvent re = new RotateGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, rotation);
 
-                return;
+                        for (GestureListener l : list)
+                        {
+                            l.rotate(re);
+                        }
+                    }
+
+                    return;
+                }
             }
         }
     }
@@ -147,26 +165,30 @@ public class MultiTouchGestureUtilities
         int mXi = (int) Math.round(mouseX);
         int mYi = (int) Math.round(mouseY);
 
-        for (HashMap.Entry<JComponent, List<GestureListener>> e : listeners.entrySet())
+        for (HashMap.Entry<JComponent, MultiTouchClient> e : clients.entrySet())
         {
             JComponent c = e.getKey();
             Rectangle r = new Rectangle(c.getLocationOnScreen(), c.getSize());
             if (r.contains(mXi, mYi))
             {
-                List<GestureListener> list = e.getValue();
-
-                Point relP = new Point(mXi, mYi);
-                SwingUtilities.convertPointFromScreen(relP, c);
+                MultiTouchClient client = e.getValue();
+                if (client.isInside())
                 {
-                    ScrollGestureEvent se = new ScrollGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, dX, dY);
+                    List<GestureListener> list = client.getListeners();
 
-                    for (GestureListener l : list)
+                    Point relP = new Point(mXi, mYi);
+                    SwingUtilities.convertPointFromScreen(relP, c);
                     {
-                        l.scroll(se);
-                    }
-                }
+                        ScrollGestureEvent se = new ScrollGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, dX, dY);
 
-                return;
+                        for (GestureListener l : list)
+                        {
+                            l.scroll(se);
+                        }
+                    }
+
+                    return;
+                }
             }
         }
     }
