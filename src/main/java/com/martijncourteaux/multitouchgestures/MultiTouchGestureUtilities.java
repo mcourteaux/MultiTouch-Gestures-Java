@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import javax.swing.JComponent;
 import java.util.List;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -86,8 +87,8 @@ public class MultiTouchGestureUtilities
             {
                 List<GestureListener> list = e.getValue();
 
-                Point relP = c.getMousePosition(true);
-                if (relP != null)
+                Point relP = new Point(mXi, mYi);
+                SwingUtilities.convertPointFromScreen(relP, c);
                 {
                     MagnifyGestureEvent me = new MagnifyGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, magnification);
 
@@ -120,8 +121,8 @@ public class MultiTouchGestureUtilities
             {
                 List<GestureListener> list = e.getValue();
 
-                Point relP = c.getMousePosition(true);
-                if (relP != null)
+                Point relP = new Point(mXi, mYi);
+                SwingUtilities.convertPointFromScreen(relP, c);
                 {
                     RotateGestureEvent re = new RotateGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, rotation);
 
@@ -154,8 +155,8 @@ public class MultiTouchGestureUtilities
             {
                 List<GestureListener> list = e.getValue();
 
-                Point relP = c.getMousePosition(true);
-                if (relP != null)
+                Point relP = new Point(mXi, mYi);
+                SwingUtilities.convertPointFromScreen(relP, c);
                 {
                     ScrollGestureEvent se = new ScrollGestureEvent(c, relP.getX(), relP.getY(), mouseX, mouseY, phase, dX, dY);
 
