@@ -16,12 +16,18 @@ your platform.
 Building
 --------
 
+Building the native library will automatically place the resuting binary in the resources folder
+of the Java project. The Java library will automatically extract the required native binary to
+a temporary file (that will be deleted after the application quits) and link against it. So,
+the only thing you will have to do to be able to use this is to build the native library and
+include the Java project as a dependency in Maven or add it manually to the classpath.
+
 ### Java
 This project is a Maven project made in NetBeans on the Java side of it. So just open this in NetBeans
 and you are basically good to go. You can compile this manually as well.
 
 ### Native Mac OS X
-This is an xcode project that resides in the mac/ directory. Just open the project in xcode and hit
+This is an Xcode project that resides in the mac/ directory. Just open the project in Xcode and hit
 "Run". This will produce the native library file (ending in .dylib) on the right location.
 
 Testing
@@ -40,7 +46,11 @@ Swing frame, just as regular. Then you can do this:
     MultiTouchGestureUtilities.addGestureListener(comp, listener);
 
 Where `listener` is a `MultiTouchGestureListener` and `comp` is the JComponent you want to add
-the listener to.
+the listener to. **When you dispose/remove a JFrame or component with a listener, you *MUST*
+remove the `MultiTouchGestureListener` using one of following techniques:**
+
+    MultiTouchGestureUtilities.removeGestureListener(comp, listener);
+    MultiTouchGestureUtilities.removeAllGestureListeners(comp);
 
 The `MultiTouchGestureListener` interface has these methods:
 

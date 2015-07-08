@@ -68,6 +68,7 @@ public class MultiTouchGestureUtilities
             if (list.isEmpty())
             {
                 client.detachListeners();
+                clients.remove(component);
             }
             listenerCount--;
             if (listenerCount == 0)
@@ -77,6 +78,25 @@ public class MultiTouchGestureUtilities
             return true;
         }
         return false;
+    }
+    
+    public static int removeAllGestureListeners(JComponent component)
+    {
+        MultiTouchClient client = clients.get(component);
+        if (client == null)
+        {
+            return 0;
+        }
+        client.detachListeners();
+        clients.remove(component);
+        List<GestureListener> list = client.getListeners();
+        if (list == null)
+        {
+            return 0;
+        }
+        int c = list.size();
+        list.clear();
+        return c;
     }
 
     protected static void dispatchMagnifyGesture(double mouseX, double mouseY, double magnification, GestureEvent.Phase phase)
