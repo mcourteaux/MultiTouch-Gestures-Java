@@ -5,17 +5,17 @@
  */
 package com.martijncourteaux.multitouchgestures.demo;
 
-import com.martijncourteaux.multitouchgestures.GestureAdapter;
-import com.martijncourteaux.multitouchgestures.MultiTouchGestureUtilities;
-import com.martijncourteaux.multitouchgestures.event.MagnifyGestureEvent;
-import com.martijncourteaux.multitouchgestures.event.RotateGestureEvent;
-import com.martijncourteaux.multitouchgestures.event.ScrollGestureEvent;
+import com.apple.eawt.event.GestureUtilities;
+import com.apple.eawt.event.MagnificationEvent;
+import com.apple.eawt.event.RotationEvent;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import java.awt.geom.Line2D;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -24,7 +24,7 @@ import javax.swing.JFrame;
  *
  * @author martijn
  */
-public class DemoSimpleGestures
+public class DemoAppleGestures
 {
 
     private static double a = 0, l = 50;
@@ -34,7 +34,7 @@ public class DemoSimpleGestures
     {
 
         JFrame frame = new JFrame();
-        frame.setTitle("MultiTouch Gestures Demo");
+        frame.setTitle("Apple Gestures Demo");
         final JComponent comp = new JComponent()
         {
 
@@ -60,28 +60,37 @@ public class DemoSimpleGestures
         frame.pack();
         frame.setVisible(true);
 
-        MultiTouchGestureUtilities.addGestureListener(comp, new GestureAdapter()
+        comp.addMouseWheelListener(new MouseWheelListener()
         {
 
             @Override
-            public void magnify(MagnifyGestureEvent e)
+            public void mouseWheelMoved(MouseWheelEvent e)
             {
-                l *= 1.0 + e.getMagnification();
+                if (e.isShiftDown())
+                {
+                    x -= 3.0f * e.getPreciseWheelRotation();
+                } else
+                {
+                    y -= 3.0f * e.getPreciseWheelRotation();
+                }
+                comp.repaint();
+            }
+        });
+
+        GestureUtilities.addGestureListenerTo(comp, new com.apple.eawt.event.GestureAdapter()
+        {
+
+            @Override
+            public void magnify(MagnificationEvent me)
+            {
+                l *= 1.0 + me.getMagnification();
                 comp.repaint();
             }
 
             @Override
-            public void rotate(RotateGestureEvent e)
+            public void rotate(RotationEvent re)
             {
-                a += e.getRotation();
-                comp.repaint();
-            }
-
-            @Override
-            public void scroll(ScrollGestureEvent e)
-            {
-                x += e.getDeltaX();
-                y += e.getDeltaY();
+                a -= Math.toRadians(re.getRotation());
                 comp.repaint();
             }
 

@@ -3,8 +3,27 @@ MultiTouch Gestures for Java
 ============================
 
 This project aims to provide an easy way to enable MultiTouch touchpad gestures for Java in Swing. This project
-was originally started as an alternative for the AppleJavaExtensions eawt package, since Apple dropt
-the support for native OS X features in Java.
+was originally started as an alternative for the AppleJavaExtensions `com.apple.eawt` package.
+
+Read this is you came here because `com.apple.eawt` is not working
+------------------------------------------------------------------
+
+You landed on this page, probably because you are unable to make `com.apple.eawt` compile
+on newer versions of Java (JDK 7 and higher). However after creating this project, I found that there is
+a workaround. You should have a look at this question on StackOverflow:
+[Using internal sun classes with javac](https://stackoverflow.com/questions/4065401/using-internal-sun-classes-with-javac).
+All the classes in the `com.apple.eawt` package are not included in the `$JAVA_HOME/lib/ct.sym` file, which makes
+the compilation fail with an error like: 
+
+    com.apple.eawt can not find package
+    package com.apple.eawt does not exist
+
+Adding `-XDignore.symbol.file` to your compiler flags solves it.
+
+However, this project still has a purpose, I believe, since you can have smooth two finger scrolling.
+The Apple gesture features don't report scroll events, which are way smoother than the ones you get using
+a classic `MouseWheelListener`.
+
 
 Supported Platforms
 -------------------
@@ -37,6 +56,10 @@ There is a test file provided in:
     src/main/java/com/martijncourteaux/multitouchgestures/demo/DemoSimpleGestures.java
 
 You can have a look at that file for a sample.
+
+You can see how this compares to the Apple Gesture support using this demo file:
+
+    src/main/java/com/martijncourteaux/multitouchgestures/demo/DemoCompareGestures.java
 
 Usage
 -----
