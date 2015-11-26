@@ -62,6 +62,14 @@ class MultiTouchClient implements MouseMotionListener, MouseListener
     public void mouseDragged(MouseEvent e)
     {
         inside = true;
+        if (e.getX() < 0 || component.getWidth() >= e.getX())
+        {
+            inside = false;
+        }
+        if (e.getY() < 0 || component.getHeight() >= e.getY())
+        {
+            inside = false;
+        }
     }
 
     @Override
@@ -86,6 +94,14 @@ class MultiTouchClient implements MouseMotionListener, MouseListener
     public void mouseReleased(MouseEvent e)
     {
         inside = true;
+        if (e.getX() < 0 || component.getWidth() >= e.getX())
+        {
+            inside = false;
+        }
+        if (e.getY() < 0 || component.getHeight() >= e.getY())
+        {
+            inside = false;
+        }
     }
 
     @Override

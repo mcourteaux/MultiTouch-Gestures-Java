@@ -1,6 +1,5 @@
 *.log
 target/
 *.dylib
-OSXGestures4JavaJNI/OSXGestures4JavaJNI.xcodeproj/project.xcworkspace
-OSXGestures4JavaJNI/OSXGestures4JavaJNI.xcodeproj/xcuserdata
-
+mac/mtg_mac.xcodeproj/project.xcworkspace/
+mac/mtg_mac.xcodeproj/xcuserdata/

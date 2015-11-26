@@ -49,6 +49,12 @@ NSEventMaskRotate |
 NSScrollWheelMask;
 
 CGEventRef eventTapCallback(CGEventTapProxy proxy, CGEventType type, CGEventRef eventRef, void *refcon) {
+    
+    if (!(type > 0 && type < kCGEventTapDisabledByTimeout))
+    {
+        return eventRef;
+    }
+    
     // convert the CGEventRef to an NSEvent
     NSEvent *event = [NSEvent eventWithCGEvent:eventRef];
     
