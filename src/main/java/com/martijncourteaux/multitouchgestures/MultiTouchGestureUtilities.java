@@ -14,6 +14,7 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import javax.swing.JComponent;
 import java.util.List;
+import java.util.Map;
 import javax.swing.SwingUtilities;
 
 /**
@@ -109,7 +110,7 @@ public class MultiTouchGestureUtilities
         int mXi = (int) Math.round(mouseX);
         int mYi = (int) Math.round(mouseY);
 
-        for (HashMap.Entry<JComponent, MultiTouchClient> e : clients.entrySet())
+        for (Map.Entry<JComponent, MultiTouchClient> e : clients.entrySet())
         {
             JComponent c = e.getKey();
             Rectangle r = new Rectangle(c.getLocationOnScreen(), c.getSize());
